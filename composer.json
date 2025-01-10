@@ -6,7 +6,7 @@
     },
     "autoload": {
         "psr-4": {
-            "KaufmannDigital\\EmailEditing\\CleverReach": "Classes"
+            "KaufmannDigital\\EmailEditing\\CleverReach\\": "Classes"
         }
     }
 }
