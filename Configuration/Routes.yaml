@@ -1,0 +1,9 @@
+-
+  name: 'Submit Mailing'
+  uriPattern: 'email-editing/cleverreach/submit'
+  httpMethods: ['POST']
+  defaults:
+    '@package': 'KaufmannDigital.EmailEditing.CleverReach'
+    '@controller': 'EmailEditingCleverReach'
+    '@action': 'submit'
+  appendExceedingArguments: true

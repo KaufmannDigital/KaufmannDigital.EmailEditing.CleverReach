@@ -1,0 +1,24 @@
+Neos:
+  Neos:
+    Ui:
+      resources:
+        javascript:
+          'KaufmannDigital.EmailEditing.CleverReach':
+            resource: 'resource://KaufmannDigital.EmailEditing.CleverReach/Public/KaufmannDigital.EmailEditing.CleverReach/Plugin.js'
+
+  Flow:
+    security:
+      authentication:
+        providers:
+          'Neos.Neos:Backend':
+            requestPatterns:
+              'KaufmannDigital.EmailEditing.CleverReach:EmailEditingCleverReachController':
+                pattern: 'ControllerObjectName'
+                patternOptions:
+                  controllerObjectNamePattern: 'KaufmannDigital\EmailEditing\CleverReach\Controller\EmailEditingCleverReachController'
+    mvc:
+      routes:
+        KaufmannDigital.EmailEditing.CleverReach:
+          position: 'before Neos.Neos'
+
+

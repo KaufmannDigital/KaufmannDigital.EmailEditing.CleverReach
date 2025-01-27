@@ -1,0 +1,10 @@
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'KaufmannDigital.EmailEditing.CleverReach:EmailEditingCleverReachController':
+      matcher: 'method(KaufmannDigital\EmailEditing\CleverReach\Controller\EmailEditingCleverReachController->(.*)Action())'
+roles:
+  'Neos.Neos:Editor':
+    privileges:
+      -
+        privilegeTarget: 'KaufmannDigital.EmailEditing.CleverReach:EmailEditingCleverReachController'
+        permission: GRANT

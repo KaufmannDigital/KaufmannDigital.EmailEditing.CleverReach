@@ -1,0 +1,52 @@
+'KaufmannDigital.EmailEditing:Document.Email':
+
+  ui:
+    inspector:
+      groups:
+        cleverreach:
+          label: 'CleverReach'
+          icon: 'paper-plane'
+
+      views:
+        cleverreach:
+          label: 'CleverReach'
+          group: cleverreach
+          view: 'KaufmannDigital.EmailEditing.CleverReach/Inspector/Views/CleverReachView'
+          viewOptions:
+            defaultEditPreviewMode: 'inPlace'
+
+  properties:
+    cleverReachSubject:
+      type: string
+      ui:
+        label: 'Betreff'
+        inspector:
+          group: cleverreach
+
+    cleverReachSenderName:
+      type: string
+      ui:
+        label: 'Absendername'
+        inspector:
+          group: cleverreach
+
+
+    cleverReachSenderMail:
+      type: string
+      ui:
+        label: 'Absender E-Mail'
+        inspector:
+          group: cleverreach
+
+
+    cleverReachReceiverGroup:
+      type: string
+      ui:
+        label: 'Empfängergruppe'
+        inspector:
+          group: cleverreach
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            dataSourceIdentifier: 'kaufmanndigital-cleverreach-groups'
+
+
