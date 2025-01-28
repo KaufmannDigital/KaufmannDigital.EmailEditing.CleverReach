@@ -1,15 +1,15 @@
-CleverReach Adapter Package für KaufmannDigital.EmailEditing
+CleverReach Adapter Package for KaufmannDigital.EmailEditing
 
 Features:
 
-- MJML aus generierten E-Mails an CleverReach übermitteln
-- Zuweisung von CleverReach Mailings zu Email Nodes
+- Transfer MJML from generated emails to CleverReach
+- Assignment of CleverReach mailings to email nodes
 
-Dieses Package benötigt kaufmanndigital/cleverreach 3.1.0 oder höher.
+This package requires kaufmanndigital/cleverreach 3.1.0 or higher.
 
-Auszug aus der CleverReach Readme:
+Excerpt from the CleverReach Readme:
 
-> You can create such credentials at https://www.cleverreach.com/login (Menu "My Account" -> "REST API"). You need credentials for REST API V3.
+> You can create such credentials at https://www.cleverreach.com/login (Menu “My Account” -> “REST API”). You need credentials for REST API V3.
 
 ```yaml
 KaufmannDigital:
@@ -19,21 +19,21 @@ KaufmannDigital:
       clientSecret: '<client-secret>'
 ```
 
-Builden der View:
+Build the view:
 
 ```bash
 cd Resources/Private/NeosUI
 yarn install
-yarn build oder yarn watch
+yarn build or yarn watch
 ```
 
 
 Todos:
-- [x] Mail NodeType mit Properties erweitern:
-  - [x] Betreff
-  - [x] Absender Name
-  - [x] Empfänger (Groups)
-  - [x] Absender Adresse
-- [x] ActionController erstellen 
-- [x] View erstellen mit Button "CleverReach Mailing erstellen". Button spricht Controller an.
-- [ ] Translations
+- [x] Extend Mail NodeType with properties:
+  - [x] Subject
+  - x] Sender name
+  - [x] Recipient (Groups)
+  - [x] Sender address
+- [x] Create ActionController
+- [x] Create view with button “Create CleverReach mailing”. Button addresses controller.
+- [x] Translations
