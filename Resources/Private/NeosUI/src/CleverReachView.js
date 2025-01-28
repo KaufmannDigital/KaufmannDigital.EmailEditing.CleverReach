@@ -11,8 +11,11 @@ import {actions, selectors} from '@neos-project/neos-ui-redux-store';
 @connect((state) => ({
     focusedNodeContextPath: selectors.CR.Nodes.focusedNodePathSelector(state),
     documentContextpath: selectors.CR.Nodes.documentNodeContextPathSelector(state),
-})) @neos((globalRegistry) => ({
-    i18nRegistry: globalRegistry.get('i18n'), serverFeedbackHandlers: globalRegistry.get('serverFeedbackHandlers'),
+}))
+
+@neos((globalRegistry) => ({
+    i18nRegistry: globalRegistry.get('i18n'),
+    serverFeedbackHandlers: globalRegistry.get('serverFeedbackHandlers'),
 }))
 
 
@@ -54,15 +57,21 @@ export default class CleverReachView extends PureComponent {
     }
 
     render() {
+        console.log(this.props.i18nRegistry)
         return (<div>
-                <Button disabled={this.state.isFetching || this.state.isTranslatingSubPages} onClick={() => {
+                <Button disabled={this.state.isFetching} onClick={() => {
                     this.submitMailing();
                 }}>
-                    {this.state.isFetching || this.state.isTranslatingSubPages ? 'Wird gesendet...' : 'Mailing zu CleverReach übermitteln'}
+                    {this.state.isFetching
+                        ? this.props.i18nRegistry.translate('buttonSending', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')
+                        : this.props.i18nRegistry.translate('buttonIdle', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')
+                    }
                 </Button>
                 <p>
-                    {this.state.success === true && <i>Mailing erfolgreich übermittelt.</i>}
-                    {this.state.success === false && <i>Fehler beim übermitteln des Mailings.</i>}
+                    {this.state.success === true &&
+                        <i>{this.props.i18nRegistry.translate('submitSuccess', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')}</i>}
+                    {this.state.success === false &&
+                        <i>{this.props.i18nRegistry.translate('submitError', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')}</i>}
                 </p>
             </div>
         );

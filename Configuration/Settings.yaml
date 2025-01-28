@@ -6,6 +6,13 @@ Neos:
           'KaufmannDigital.EmailEditing.CleverReach':
             resource: 'resource://KaufmannDigital.EmailEditing.CleverReach/Public/KaufmannDigital.EmailEditing.CleverReach/Plugin.js'
 
+    userInterface:
+      translation:
+        autoInclude:
+          KaufmannDigital.EmailEditing.CleverReach:
+            - Main
+            - 'NodeTypes/*'
+
   Flow:
     security:
       authentication:
@@ -20,5 +27,3 @@ Neos:
       routes:
         KaufmannDigital.EmailEditing.CleverReach:
           position: 'before Neos.Neos'
-
-

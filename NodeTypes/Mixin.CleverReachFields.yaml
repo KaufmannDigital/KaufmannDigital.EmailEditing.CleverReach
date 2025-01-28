@@ -1,15 +1,16 @@
-'KaufmannDigital.EmailEditing:Document.Email':
+'KaufmannDigital.EmailEditing.CleverReach:Mixin.CleverReachFields':
+  abstract: true
 
   ui:
     inspector:
       groups:
         cleverreach:
-          label: 'CleverReach'
+          label: i18n
           icon: 'paper-plane'
 
       views:
         cleverreach:
-          label: 'CleverReach'
+          label: i18n
           group: cleverreach
           view: 'KaufmannDigital.EmailEditing.CleverReach/Inspector/Views/CleverReachView'
           viewOptions:
@@ -19,14 +20,14 @@
     cleverReachSubject:
       type: string
       ui:
-        label: 'Betreff'
+        label: i18n
         inspector:
           group: cleverreach
 
     cleverReachSenderName:
       type: string
       ui:
-        label: 'Absendername'
+        label: i18n
         inspector:
           group: cleverreach
 
@@ -34,7 +35,7 @@
     cleverReachSenderMail:
       type: string
       ui:
-        label: 'Absender E-Mail'
+        label: i18n
         inspector:
           group: cleverreach
 
@@ -42,11 +43,12 @@
     cleverReachReceiverGroup:
       type: string
       ui:
-        label: 'Empfängergruppe'
+        label: i18n
         inspector:
           group: cleverreach
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
           editorOptions:
             dataSourceIdentifier: 'kaufmanndigital-cleverreach-groups'
 
-
+    cleverReachMailingId:
+      type: string

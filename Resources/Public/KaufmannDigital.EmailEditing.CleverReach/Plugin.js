@@ -141,9 +141,10 @@
       };
     }
     render() {
-      return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(import_react_ui_components.Button, { disabled: this.state.isFetching || this.state.isTranslatingSubPages, onClick: () => {
+      console.log(this.props.i18nRegistry);
+      return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(import_react_ui_components.Button, { disabled: this.state.isFetching, onClick: () => {
         this.submitMailing();
-      } }, this.state.isFetching || this.state.isTranslatingSubPages ? "Wird gesendet..." : "Mailing zu CleverReach \xFCbermitteln"), /* @__PURE__ */ import_react.default.createElement("p", null, this.state.success === true && /* @__PURE__ */ import_react.default.createElement("i", null, "Mailing erfolgreich \xFCbermittelt."), this.state.success === false && /* @__PURE__ */ import_react.default.createElement("i", null, "Fehler beim \xFCbermitteln des Mailings.")));
+      } }, this.state.isFetching ? this.props.i18nRegistry.translate("buttonSending", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main") : this.props.i18nRegistry.translate("buttonIdle", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main")), /* @__PURE__ */ import_react.default.createElement("p", null, this.state.success === true && /* @__PURE__ */ import_react.default.createElement("i", null, this.props.i18nRegistry.translate("submitSuccess", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main")), this.state.success === false && /* @__PURE__ */ import_react.default.createElement("i", null, this.props.i18nRegistry.translate("submitError", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main"))));
     }
   };
   CleverReachView = __decorateClass([

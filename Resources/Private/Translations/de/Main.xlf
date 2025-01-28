@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file original="" product-name="KaufmannDigital.EmailEditing.CleverReach" source-language="en" target-language="de" datatype="plaintext">
+        <body>
+            <trans-unit id="submitSuccess" xml:space="preserve" approved="yes">
+                <source>Mailing successfully submitted</source>
+                <target xml:lang="de">Mailing erfolgreich übermittelt</target>
+            </trans-unit>
+            <trans-unit id="submitError" xml:space="preserve" approved="yes">
+                <source>Error while submitting the mailing</source>
+                <target xml:lang="de">Fehler beim übermitteln des Mailings</target>
+            </trans-unit>
+            <trans-unit id="buttonIdle" xml:space="preserve" approved="yes">
+                <source>Submit mailing to CleverReach</source>
+                <target xml:lang="de">Mailing zu CleverReach übermitteln</target>
+            </trans-unit>
+            <trans-unit id="buttonSending" xml:space="preserve" approved="yes">
+                <source>Sending...</source>
+                <target xml:lang="de">Wird gesendet...</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

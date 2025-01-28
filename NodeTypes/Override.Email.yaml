@@ -1,0 +1,4 @@
+'KaufmannDigital.EmailEditing:Document.Email':
+  superTypes:
+    'KaufmannDigital.EmailEditing.CleverReach:Mixin.CleverReachFields': true
+

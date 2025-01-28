@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" product-name="KaufmannDigital.EmailEditing.CleverReach"  source-language="en" target-language="de" datatype="plaintext">
+		<body>
+            <trans-unit id="ui.inspector.groups.cleverreach.label">
+                <source>CleverReach</source>
+                <target>CleverReach</target>
+            </trans-unit>
+            <trans-unit id="ui.inspector.views.cleverreach.label">
+                <source>CleverReach</source>
+                <target>CleverReach</target>
+            </trans-unit>
+            <trans-unit id="properties.cleverReachSubject">
+                <source>Subject</source>
+                <target>Betreff</target>
+            </trans-unit>
+            <trans-unit id="properties.cleverReachSenderName">
+                <source>Sender Name</source>
+                <target>Absendername</target>
+            </trans-unit>
+            <trans-unit id="properties.cleverReachSenderMail">
+                <source>Sender Mail</source>
+                <target>Absender Email</target>
+            </trans-unit>
+            <trans-unit id="properties.cleverReachReceiverGroup">
+                <source>Receiver Group</source>
+                <target>Empfängergruppe</target>
+            </trans-unit>
+        </body>
+	</file>
+</xliff>

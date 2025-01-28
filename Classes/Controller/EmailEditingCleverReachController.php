@@ -5,12 +5,15 @@ namespace KaufmannDigital\EmailEditing\CleverReach\Controller;
 use KaufmannDigital\CleverReach\Domain\Service\CleverReachApiService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\I18n\Locale;
+use Neos\Flow\I18n\Translator;
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Mvc\ActionResponse;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\JsonView;
+use Neos\Neos\Service\UserService;
 use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Error;
-use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Info;
+use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Success;
 use Neos\Neos\Ui\Domain\Model\FeedbackCollection;
 
 
@@ -24,16 +27,26 @@ class EmailEditingCleverReachController extends RestController
     #[Flow\Inject]
     protected FeedbackCollection $feedbackCollection;
 
+    #[Flow\Inject]
+    protected Translator $translator;
+
+    protected Locale $locale;
+
+    #[Flow\Inject]
+    protected UserService $userService;
 
     protected function initializeController(ActionRequest $request, ActionResponse $response)
     {
         parent::initializeController($request, $response);
         $this->feedbackCollection->setControllerContext($this->getControllerContext());
+        $this->locale = new Locale($this->userService->getInterfaceLanguage());
     }
 
 
     public function submitAction(NodeInterface $node, array $options = []): void
     {
+        $mailingId = $node->getProperty('cleverReachMailingId');
+
         $data = [
             "name" => $node->getProperty('title'),
             "subject" => $node->getProperty('cleverReachSubject'),
@@ -42,7 +55,7 @@ class EmailEditingCleverReachController extends RestController
             "content" => [
                 "type" => "html",
                 "html" => '<html><body>TODO REPLACE WITH MAILING CONTENT</body></html>',
-                ],
+            ],
             "receivers" => [
                 "groups" => [
                     $node->getProperty('cleverReachReceiverGroup'),
@@ -59,13 +72,21 @@ class EmailEditingCleverReachController extends RestController
         $response = [];
 
         try {
-            $this->cleverReachApiService->createMailing($data);
+            if ($mailingId) {
+                $this->cleverReachApiService->updateMailing($mailingId, $data);
+            } else {
+                $mailingResponse = $this->cleverReachApiService->createMailing($data);
+                $mailingId = $mailingResponse['id'];
+                $node->setProperty('cleverReachMailingId', $mailingId);
+            }
 
-            $success = new Info();
-            $success->setMessage('Mailing übermittelt.'); // TODO: i18n
+            $success = new Success();
+            $success->setMessage($this->translator->translateById('submitSuccess', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach'));
             $this->feedbackCollection->add($success);
         } catch (\Exception $e) {
-            $error = new Error('Fehler beim übermitteln des Mailings.'); // todo: i18n
+            $error = new Error();
+            $error->setMessage($this->translator->translateById('submitError', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach'));
+
             $this->feedbackCollection->add($error);
             $response['error'] = $e->getMessage();
         }
