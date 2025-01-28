@@ -14,6 +14,9 @@
             <trans-unit id="buttonSending" xml:space="preserve" approved="yes">
                 <source>Sending...</source>
             </trans-unit>
+            <trans-unit id="inputIncomplete" xml:space="preserve" approved="yes">
+                <source>Please fill out all fields and press apply before submitting</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

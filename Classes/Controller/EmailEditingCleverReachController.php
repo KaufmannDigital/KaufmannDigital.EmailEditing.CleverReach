@@ -47,18 +47,33 @@ class EmailEditingCleverReachController extends RestController
     {
         $mailingId = $node->getProperty('cleverReachMailingId');
 
+        $mailingTitle = $node->getProperty('title');
+        $subject = $node->getProperty('cleverReachSubject');
+        $senderName = $node->getProperty('cleverReachSenderName');
+        $senderMail = $node->getProperty('cleverReachSenderMail');
+        $groups = $node->getProperty('cleverReachReceiverGroup');
+
+        if (empty($mailingTitle) || empty($subject) || empty($senderName) || empty($senderMail) || empty($groups)) {
+            $error = new Error();
+            $message = $this->translator->translateById('inputIncomplete', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach');
+            $error->setMessage($message);
+            $this->feedbackCollection->add($error);
+            $this->view->assign("value", ['feedback' => $this->feedbackCollection, 'message' => $message]);
+            return;
+        }
+
         $data = [
-            "name" => $node->getProperty('title'),
-            "subject" => $node->getProperty('cleverReachSubject'),
-            "sender_name" => $node->getProperty('cleverReachSenderName'),
-            "sender_email" => $node->getProperty('cleverReachSenderMail'),
+            "name" => $mailingTitle,
+            "subject" => $subject,
+            "sender_name" => $senderName,
+            "sender_email" => $senderMail,
             "content" => [
                 "type" => "html",
                 "html" => '<html><body>TODO REPLACE WITH MAILING CONTENT</body></html>',
             ],
             "receivers" => [
                 "groups" => [
-                    $node->getProperty('cleverReachReceiverGroup'),
+                    $groups,
                 ]
             ],
             "settings" => [
@@ -73,7 +88,10 @@ class EmailEditingCleverReachController extends RestController
 
         try {
             if ($mailingId) {
-                $this->cleverReachApiService->updateMailing($mailingId, $data);
+                $mailingResponse = $this->cleverReachApiService->updateMailing($mailingId, $data);
+                if (isset($mailingResponse['error'])) {
+                    throw new \Exception($mailingResponse['error']['message']);
+                }
             } else {
                 $mailingResponse = $this->cleverReachApiService->createMailing($data);
                 $mailingId = $mailingResponse['id'];
@@ -81,16 +99,19 @@ class EmailEditingCleverReachController extends RestController
             }
 
             $success = new Success();
-            $success->setMessage($this->translator->translateById('submitSuccess', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach'));
+            $message = $this->translator->translateById('submitSuccess', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach');
+            $success->setMessage($message);
             $this->feedbackCollection->add($success);
         } catch (\Exception $e) {
             $error = new Error();
-            $error->setMessage($this->translator->translateById('submitError', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach'));
+            $message = $this->translator->translateById('submitError', [], null, $this->locale, 'Main', 'KaufmannDigital.EmailEditing.CleverReach');
+            $error->setMessage($message);
 
             $this->feedbackCollection->add($error);
             $response['error'] = $e->getMessage();
         }
 
+        $response['message'] = $message;
         $response['feedback'] = $this->feedbackCollection;
 
         $this->view->assign('value', $response);

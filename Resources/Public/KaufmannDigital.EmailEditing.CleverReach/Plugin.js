@@ -128,7 +128,8 @@
           }));
           const responseJson = await response.json();
           this.props.dispatch(import_neos_ui_redux_store.actions.ServerFeedback.handleServerFeedback(responseJson.feedback));
-          this.setState((prev) => ({ ...prev, isFetching: false, success: true }));
+          this.setState((prev) => ({ ...prev, isFetching: false, message: responseJson.message }));
+          console.log(this.state);
         } catch (e) {
           console.log(e);
           this.setState((prev) => ({ ...prev, isFetching: false, success: false }));
@@ -137,6 +138,7 @@
       this.submitMailing = this.submitMailing.bind(this);
       this.state = {
         isFetching: false,
+        message: null,
         success: null
       };
     }
@@ -144,7 +146,7 @@
       console.log(this.props.i18nRegistry);
       return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(import_react_ui_components.Button, { disabled: this.state.isFetching, onClick: () => {
         this.submitMailing();
-      } }, this.state.isFetching ? this.props.i18nRegistry.translate("buttonSending", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main") : this.props.i18nRegistry.translate("buttonIdle", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main")), /* @__PURE__ */ import_react.default.createElement("p", null, this.state.success === true && /* @__PURE__ */ import_react.default.createElement("i", null, this.props.i18nRegistry.translate("submitSuccess", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main")), this.state.success === false && /* @__PURE__ */ import_react.default.createElement("i", null, this.props.i18nRegistry.translate("submitError", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main"))));
+      } }, this.state.isFetching ? this.props.i18nRegistry.translate("buttonSending", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main") : this.props.i18nRegistry.translate("buttonIdle", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main")), /* @__PURE__ */ import_react.default.createElement("p", null, this.state.message !== null && /* @__PURE__ */ import_react.default.createElement("i", null, this.state.message), this.state.success === false && /* @__PURE__ */ import_react.default.createElement("i", null, this.props.i18nRegistry.translate("submitError", "", {}, "KaufmannDigital.EmailEditing.CleverReach", "Main"))));
     }
   };
   CleverReachView = __decorateClass([

@@ -18,6 +18,10 @@
                 <source>Sending...</source>
                 <target xml:lang="de">Wird gesendet...</target>
             </trans-unit>
+            <trans-unit id="inputIncomplete" xml:space="preserve" approved="yes">
+                <source>Please fill out all fields and press apply before submitting</source>
+                <target xml:lang="de">Bitte alle Felder ausfüllen und vor dem Absenden auf Übernehmen klicken.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

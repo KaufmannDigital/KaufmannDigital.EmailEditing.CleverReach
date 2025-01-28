@@ -27,6 +27,7 @@ export default class CleverReachView extends PureComponent {
 
         this.state = {
             isFetching: false,
+            message: null,
             success: null,
         };
     }
@@ -49,7 +50,8 @@ export default class CleverReachView extends PureComponent {
 
             // show flash message
             this.props.dispatch(actions.ServerFeedback.handleServerFeedback(responseJson.feedback));
-            this.setState(prev => ({...prev, isFetching: false, success: true}));
+            this.setState(prev => ({...prev, isFetching: false, message: responseJson.message}));
+            console.log(this.state)
         } catch (e) {
             console.log(e)
             this.setState(prev => ({...prev, isFetching: false, success: false}));
@@ -68,10 +70,12 @@ export default class CleverReachView extends PureComponent {
                     }
                 </Button>
                 <p>
-                    {this.state.success === true &&
-                        <i>{this.props.i18nRegistry.translate('submitSuccess', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')}</i>}
+                    {this.state.message !== null &&
+                        <i>{this.state.message}</i>
+                    }
                     {this.state.success === false &&
-                        <i>{this.props.i18nRegistry.translate('submitError', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')}</i>}
+                        <i>{this.props.i18nRegistry.translate('submitError', '', {}, 'KaufmannDigital.EmailEditing.CleverReach', 'Main')}</i>
+                    }
                 </p>
             </div>
         );
