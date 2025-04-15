@@ -20,9 +20,10 @@ Neos:
           'Neos.Neos:Backend':
             requestPatterns:
               'KaufmannDigital.EmailEditing.CleverReach:EmailEditingCleverReachController':
-                pattern: 'ControllerObjectName'
+                pattern: ControllerObjectName
                 patternOptions:
-                  controllerObjectNamePattern: 'KaufmannDigital\EmailEditing\CleverReach\Controller\EmailEditingCleverReachController'
+                  controllerObjectNamePattern: 'KaufmannDigital\EmailEditing\CleverReach\.*'
+
     mvc:
       routes:
         KaufmannDigital.EmailEditing.CleverReach:
