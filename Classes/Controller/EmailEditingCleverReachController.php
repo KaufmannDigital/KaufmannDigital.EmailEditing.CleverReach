@@ -3,7 +3,10 @@
 namespace KaufmannDigital\EmailEditing\CleverReach\Controller;
 
 use KaufmannDigital\CleverReach\Domain\Service\CleverReachApiService;
+use KaufmannDigital\EmailEditing\Service\MjmlService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
+use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Locale;
 use Neos\Flow\I18n\Translator;
@@ -11,10 +14,14 @@ use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Mvc\ActionResponse;
 use Neos\Flow\Mvc\Controller\RestController;
 use Neos\Flow\Mvc\View\JsonView;
+use Neos\Flow\Package\PackageManager;
 use Neos\Neos\Service\UserService;
 use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Error;
 use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Success;
 use Neos\Neos\Ui\Domain\Model\FeedbackCollection;
+use Neos\Neos\View\FusionView;
+use Spatie\Mjml\Mjml;
+use Spatie\Mjml\ValidationLevel;
 
 
 class EmailEditingCleverReachController extends RestController
@@ -34,6 +41,9 @@ class EmailEditingCleverReachController extends RestController
 
     #[Flow\Inject]
     protected UserService $userService;
+
+    #[Flow\Inject]
+    protected MjmlService $mjmlService;
 
     protected function initializeController(ActionRequest $request, ActionResponse $response)
     {
@@ -62,6 +72,14 @@ class EmailEditingCleverReachController extends RestController
             return;
         }
 
+
+        $mjml = $this->mjmlService->getMjmlSourceForEmail($node, $this->controllerContext);
+
+        $html = Mjml::new()
+            ->validationLevel(ValidationLevel::Skip)
+            ->toHtml($mjml);
+
+
         $data = [
             "name" => $mailingTitle,
             "subject" => $subject,
@@ -69,7 +87,7 @@ class EmailEditingCleverReachController extends RestController
             "sender_email" => $senderMail,
             "content" => [
                 "type" => "html",
-                "html" => '<html><body>TODO REPLACE WITH MAILING CONTENT</body></html>',
+                "html" => $html
             ],
             "receivers" => [
                 "groups" => [
