@@ -1,0 +1,5 @@
+KaufmannDigital:
+  EmailEditing:
+    mjmlRendering:
+      fusionPaths:
+        'KaufmannDigital.EmailEditing.CleverReach': 'resource://KaufmannDigital.EmailEditing.CleverReach/Private/Fusion'

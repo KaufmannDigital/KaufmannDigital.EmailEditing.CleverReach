@@ -2,7 +2,7 @@
     "name": "kaufmanndigital/email-editing-cleverreach",
     "type": "neos-package",
     "require": {
-        "kaufmanndigital/email-editing": "*",
+        "kaufmanndigital/email-editing": ">=1.2.0",
         "kaufmanndigital/cleverreach": ">=3.2.0"
     },
     "autoload": {
