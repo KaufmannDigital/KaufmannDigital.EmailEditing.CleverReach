@@ -16,6 +16,13 @@
           viewOptions:
             defaultEditPreviewMode: 'inPlace'
 
+        placeHolderInfo:
+          label: 'Info-Seite: Verfügbare Platzhalter'
+          group: cleverreach
+          view: 'KaufmannDigital.EmailEditing.CleverReach/Inspector/Views/HintLinkView'
+          viewOptions:
+            defaultEditPreviewMode: 'inPlace'
+
   properties:
     cleverReachSubject:
       type: string

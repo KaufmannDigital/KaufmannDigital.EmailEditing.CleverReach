@@ -160,11 +160,41 @@
     }))
   ], CleverReachView);
 
+  // src/HintLinkView.js
+  var import_react2 = __toESM(require_react());
+  var import_react_redux2 = __toESM(require_react_redux());
+  var import_neos_ui_decorators2 = __toESM(require_neos_ui_decorators());
+  var import_react_ui_components2 = __toESM(require_react_ui_components());
+  var import_neos_ui_redux_store2 = __toESM(require_neos_ui_redux_store());
+  var HintLinkView = class extends import_react2.PureComponent {
+    render() {
+      return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement(import_react_ui_components2.Button, { onClick: () => {
+        window.open("https://support.cleverreach.com/hc/de/articles/202372531-Personalisierung-und-Platzhalter-in-Ihren-Mailings", "_blank");
+      } }, "Verf\xFCgbare Platzhalter (CleverReach)"));
+    }
+  };
+  HintLinkView = __decorateClass([
+    (0, import_react_redux2.connect)((state) => ({
+      focusedNodeContextPath: import_neos_ui_redux_store2.selectors.CR.Nodes.focusedNodePathSelector(state),
+      documentContextpath: import_neos_ui_redux_store2.selectors.CR.Nodes.documentNodeContextPathSelector(state)
+    })),
+    (0, import_neos_ui_decorators2.neos)((globalRegistry) => ({
+      i18nRegistry: globalRegistry.get("i18n"),
+      serverFeedbackHandlers: globalRegistry.get("serverFeedbackHandlers")
+    }))
+  ], HintLinkView);
+
   // src/manifest.js
   dist_default("KaufmannDigital.EmailEditing.CleverReach", {}, (globalRegistry) => {
     const viewsRegistry = globalRegistry.get("inspector").get("views");
     viewsRegistry.set("KaufmannDigital.EmailEditing.CleverReach/Inspector/Views/CleverReachView", {
       component: CleverReachView
+    });
+  });
+  dist_default("KaufmannDigital.EmailEditing.CleverReach", {}, (globalRegistry) => {
+    const viewsRegistry = globalRegistry.get("inspector").get("views");
+    viewsRegistry.set("KaufmannDigital.EmailEditing.CleverReach/Inspector/Views/HintLinkView", {
+      component: HintLinkView
     });
   });
 })();
