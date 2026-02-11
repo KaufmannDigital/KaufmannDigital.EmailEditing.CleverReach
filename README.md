@@ -1,39 +1,51 @@
-CleverReach Adapter Package for KaufmannDigital.EmailEditing
+# KaufmannDigital.EmailEditing.CleverReach
 
-Features:
+A companion package for [`kaufmanndigital/email-editing`](https://github.com/KaufmannDigital/KaufmannDigital.EmailEditing) that adds [CleverReach](https://www.cleverreach.com/) integration. Submit emails created in the Neos backend directly to CleverReach as mailings — without leaving the CMS.
 
-- Transfer MJML from generated emails to CleverReach
-- Assignment of CleverReach mailings to email nodes
+## Features
 
-This package requires kaufmanndigital/cleverreach 3.1.0 or higher.
+- **Submit Mailings** — Transfer emails directly from Neos to CleverReach with a single click
+- **Receiver Groups** — Select CleverReach recipient groups from within the Neos inspector
+- **Sender Configuration** — Set subject, sender name, and sender email per email
+- **Mailing Updates** — Re-submit to update an existing mailing in CleverReach
+- **Full i18n Support** — All labels available in English and German
 
-Excerpt from the CleverReach Readme:
+## Requirements
 
-> You can create such credentials at https://www.cleverreach.com/login (Menu “My Account” -> “REST API”). You need credentials for REST API V3.
+- [`kaufmanndigital/email-editing`](https://github.com/KaufmannDigital/KaufmannDigital.EmailEditing) >= 1.2.0
+- [`kaufmanndigital/cleverreach`](https://github.com/KaufmannDigital/KaufmannDigital.CleverReach) >= 3.2.0
 
-```yaml
-KaufmannDigital:
-  CleverReach:
-    credentials:
-      clientId: '<client-id>'
-      clientSecret: '<client-secret>'
+## Installation
+
+Install via Composer:
+
+```sh
+composer require kaufmanndigital/email-editing-cleverreach
 ```
 
-Build the view:
+## Configuration
 
-```bash
+This package requires configured CleverReach API credentials. See the [KaufmannDigital.CleverReach README](https://github.com/KaufmannDigital/CleverReach#configuration) for setup instructions.
+
+## Usage
+
+Once installed and configured, a **CleverReach** inspector panel appears on every Email document. Fill in the required fields and click **Submit mailing to CleverReach**:
+
+| Field              | Description                                         |
+|--------------------|-----------------------------------------------------|
+| **Subject**        | The email subject line                              |
+| **Sender Name**    | Display name shown to recipients                    |
+| **Sender Mail**    | Sender email address                                |
+| **Receiver Group** | Target recipient group (loaded from CleverReach)    |
+
+After submission, the mailing is available in your CleverReach account for review and dispatch.
+
+## UI Development
+
+```sh
 cd Resources/Private/NeosUI
 yarn install
-yarn build or yarn watch
+yarn build
 ```
 
-
-Todos:
-- [x] Extend Mail NodeType with properties:
-  - [x] Subject
-  - x] Sender name
-  - [x] Recipient (Groups)
-  - [x] Sender address
-- [x] Create ActionController
-- [x] Create view with button “Create CleverReach mailing”. Button addresses controller.
-- [x] Translations
+Use `yarn watch` for development with automatic rebuilds.
