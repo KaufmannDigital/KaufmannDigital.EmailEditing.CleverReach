@@ -51,15 +51,12 @@ export default class CleverReachView extends PureComponent {
             // show flash message
             this.props.dispatch(actions.ServerFeedback.handleServerFeedback(responseJson.feedback));
             this.setState(prev => ({...prev, isFetching: false, message: responseJson.message}));
-            console.log(this.state)
         } catch (e) {
-            console.log(e)
             this.setState(prev => ({...prev, isFetching: false, success: false}));
         }
     }
 
     render() {
-        console.log(this.props.i18nRegistry)
         return (<div>
                 <Button disabled={this.state.isFetching} onClick={() => {
                     this.submitMailing();
@@ -81,4 +78,3 @@ export default class CleverReachView extends PureComponent {
         );
     }
 }
-
