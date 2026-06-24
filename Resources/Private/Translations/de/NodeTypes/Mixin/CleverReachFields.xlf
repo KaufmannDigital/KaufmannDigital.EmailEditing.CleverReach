@@ -2,11 +2,11 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 	<file original="" product-name="KaufmannDigital.EmailEditing.CleverReach"  source-language="en" target-language="de" datatype="plaintext">
 		<body>
-            <trans-unit id="ui.inspector.groups.cleverreach.label">
+            <trans-unit id="groups.cleverreach">
                 <source>CleverReach</source>
                 <target>CleverReach</target>
             </trans-unit>
-            <trans-unit id="ui.inspector.views.cleverreach.label">
+            <trans-unit id="views.cleverreach">
                 <source>CleverReach</source>
                 <target>CleverReach</target>
             </trans-unit>
