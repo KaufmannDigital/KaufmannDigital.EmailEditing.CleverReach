@@ -3,6 +3,7 @@
 namespace KaufmannDigital\EmailEditing\CleverReach\Controller;
 
 use KaufmannDigital\CleverReach\Domain\Service\CleverReachApiService;
+use KaufmannDigital\EmailEditing\Service\MjmlConverter;
 use KaufmannDigital\EmailEditing\Service\MjmlService;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
@@ -20,8 +21,6 @@ use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Error;
 use Neos\Neos\Ui\Domain\Model\Feedback\Messages\Success;
 use Neos\Neos\Ui\Domain\Model\FeedbackCollection;
 use Neos\Neos\View\FusionView;
-use Spatie\Mjml\Mjml;
-use Spatie\Mjml\ValidationLevel;
 
 
 class EmailEditingCleverReachController extends RestController
@@ -44,6 +43,9 @@ class EmailEditingCleverReachController extends RestController
 
     #[Flow\Inject]
     protected MjmlService $mjmlService;
+
+    #[Flow\Inject]
+    protected MjmlConverter $mjmlConverter;
 
     protected function initializeController(ActionRequest $request, ActionResponse $response)
     {
@@ -75,9 +77,7 @@ class EmailEditingCleverReachController extends RestController
 
         $mjml = $this->mjmlService->getMjmlSourceForEmail($node, $this->controllerContext);
 
-        $html = Mjml::new()
-            ->validationLevel(ValidationLevel::Skip)
-            ->toHtml($mjml);
+        $html = $this->mjmlConverter->toHtml($mjml);
 
 
         $data = [
